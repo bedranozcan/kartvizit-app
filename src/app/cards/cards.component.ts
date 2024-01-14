@@ -12,34 +12,20 @@ import { Card } from '../models/card';
 export class CardsComponent implements OnInit {
 
   cards!:Card[];
-  cardItem={
-    title:'Bilgisayar Mühendisi',
-    name:'Bedran Özcan',
-    phone:'0555 555 55',
-    email:'bedran.ozcan@idvlabs.com',
-    address:'Ankara,Yenimahalle'
-  }
+
   constructor(
     public dialog:MatDialog,
-    private cardService:CardService
+    public cardService:CardService
   ) { }
 
   ngOnInit(): void {
-    this.getCard();
+   this.cardService.getCard();
   }
 
   
   openAddCardModel(): void{
-    this.dialog.open(CardModalComponent,{
+    const dialog=this.dialog.open(CardModalComponent,{
       width:'400px'
     });
-  }
-
-  getCard(){
-    this.cardService.getCard()
-    .subscribe((res:Card[])=>{
-      console.log(res);
-      this.cards=res;
-    })
   }
 }
